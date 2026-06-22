@@ -1,0 +1,57 @@
+{% extends 'layout.html' %} {% block content %}
+<h1 class="page-title">Kết Quả Chẩn Đoán</h1>
+<p class="date-created">Ngày tạo: {{ data.date }}</p>
+
+<div class="results-grid">
+    <div class="card info-card">
+        <h3>Thông tin bệnh nhân</h3>
+        <p><strong>Họ tên:</strong> {{ data.patient.name }}</p>
+        <p><strong>Tuổi:</strong> {{ data.patient.age }}</p>
+        <p><strong>Giới tính:</strong> {{ data.patient.gender }}</p>
+        <p><strong>SĐT:</strong> {{ data.patient.phone }}</p>
+        <p><strong>Địa chỉ:</strong> {{ data.patient.address }}</p>
+        <hr>
+        <p><strong>Triệu chứng:</strong> {{ data.symptoms | join(', ') }}</p>
+    </div>
+
+    <div class="card disease-card">
+        <h3>Bệnh nghi ngờ</h3>
+        <ul>
+            {% for d in data.diagnosis.diseases %}
+            <li>{{ d }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="card test-card">
+        <h3>Xét nghiệm đề xuất</h3>
+        <ul>
+            {% if data.diagnosis.tests %} {% for t in data.diagnosis.tests %}
+            <li>{{ t }}</li>
+            {% endfor %} {% else %}
+            <li>Chưa có đề xuất đặc thù.</li>
+            {% endif %}
+        </ul>
+    </div>
+
+    <div class="card treatment-card">
+        <h3>Phương pháp điều trị tham khảo</h3>
+        <ul>
+            {% if data.diagnosis.treatments %} {% for tr in data.diagnosis.treatments %}
+            <li>{{ tr }}</li>
+            {% endfor %} {% else %}
+            <li>Chưa có đề xuất đặc thù.</li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+
+<div class="warning-box">
+    <strong>LƯU Ý:</strong> Kết quả chỉ mang tính tham khảo, không thay thế chẩn đoán của bác sĩ.
+</div>
+
+<div class="action-card">
+    <a href="{{ url_for('export_pdf') }}" class="btn-pdf">📄 Xuất Báo Cáo PDF</a>
+    <a href="{{ url_for('index') }}" class="btn-back">Chẩn đoán lại</a>
+</div>
+{% endblock %}
