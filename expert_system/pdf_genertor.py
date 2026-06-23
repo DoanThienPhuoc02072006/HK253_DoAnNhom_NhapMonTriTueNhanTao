@@ -22,3 +22,27 @@ def generate_pdf(data, filepath):
     c.setFont("Helvetica-Bold", 16)
     c.drawString(50, y, "Bao cao Chan doan Benh Ho hap (Tham khao)")
     y -= 30
+    c.setFont("Helvetica", 12)
+    c.drawString(50, y, f"Ngay tao: {data['date']}")
+    y -= 30
+
+    # Thông tin bệnh nhân
+    c.setFont("Helvetica-Bold", 14)
+    c.drawString(50, y, "1. Thong tin benh nhan")
+    y -= 20
+    c.setFont("Helvetica", 12)
+    patient = data['patient']
+    c.drawString(70, y, f"Ho ten: {remove_accents(patient['name'])} - Tuoi: {patient['age']} - Gioi tinh: {remove_accents(patient['gender'])}")
+    y -= 20
+    c.drawString(70, y, f"SDT: {patient['phone']} - Dia chi: {remove_accents(patient['address'])}")
+    y -= 30
+
+    # Triệu chứng
+    c.setFont("Helvetica-Bold", 14)
+    c.drawString(50, y, "2. Trieu chung ghi nhan")
+    y -= 20
+    c.setFont("Helvetica", 12)
+    symptoms_text = ", ".join(data['symptoms'])
+    c.drawString(70, y, remove_accents(symptoms_text))
+    y -= 30
+    
