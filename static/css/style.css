@@ -1,1 +1,22 @@
+/* Màu chủ đạo: Đỏ, Trắng, Đen */
+:root {
+    --primary-red: #d32f2f;
+    --dark-red: #b71c1c;
+    --white: #ffffff;
+    --black: #212121;
+    --gray-bg: #f5f5f5;
+    --border-color: #e0e0e0;
+}
 
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--gray-bg);
+    color: var(--black);
+    line-height: 1.6;
+}
