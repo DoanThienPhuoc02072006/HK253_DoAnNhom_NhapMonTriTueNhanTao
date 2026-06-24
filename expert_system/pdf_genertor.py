@@ -45,4 +45,27 @@ def generate_pdf(data, filepath):
     symptoms_text = ", ".join(data['symptoms'])
     c.drawString(70, y, remove_accents(symptoms_text))
     y -= 30
+    # Bệnh chẩn đoán
+    c.setFont("Helvetica-Bold", 14)
+    c.drawString(50, y, "3. Benh nghi ngo")
+    y -= 20
+    c.setFont("Helvetica", 12)
+    for d in data['diagnosis']['diseases']:
+        c.drawString(70, y, f"- {remove_accents(d)}")
+        y -= 20
+    y -= 10
+
+    # Xét nghiệm
+    c.setFont("Helvetica-Bold", 14)
+    c.drawString(50, y, "4. De xuat xet nghiem")
+    y -= 20
+    c.setFont("Helvetica", 12)
+    if data['diagnosis']['tests']:
+        for t in data['diagnosis']['tests']:
+            c.drawString(70, y, f"- {remove_accents(t)}")
+            y -= 20
+    else:
+        c.drawString(70, y, "Khong co")
+        y -= 20
+    y -= 10
     
