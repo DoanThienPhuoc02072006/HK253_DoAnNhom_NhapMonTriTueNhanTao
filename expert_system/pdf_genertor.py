@@ -68,4 +68,22 @@ def generate_pdf(data, filepath):
         c.drawString(70, y, "Khong co")
         y -= 20
     y -= 10
+    # Điều trị
+    c.setFont("Helvetica-Bold", 14)
+    c.drawString(50, y, "5. Phuong phap dieu tri tham khao")
+    y -= 20
+    c.setFont("Helvetica", 12)
+    if data['diagnosis']['treatments']:
+        for tr in data['diagnosis']['treatments']:
+            c.drawString(70, y, f"- {remove_accents(tr)}")
+            y -= 20
+    else:
+        c.drawString(70, y, "Khong co")
+        y -= 20
+        
+    y -= 40
+    c.setFont("Helvetica-Bold", 12)
+    c.drawString(50, y, "LUU Y: Ket qua chi mang tinh tham khao, khong thay the chan doan cua bac si.")
+
+    c.save()
     
