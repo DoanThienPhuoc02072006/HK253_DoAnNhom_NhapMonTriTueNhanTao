@@ -22,6 +22,7 @@ def generate_pdf(data, filepath):
     c.setFont("Helvetica-Bold", 16)
     c.drawString(50, y, "Bao cao Chan doan Benh Ho hap (Tham khao)")
     y -= 30
+    
     c.setFont("Helvetica", 12)
     c.drawString(50, y, f"Ngay tao: {data['date']}")
     y -= 30
@@ -45,6 +46,7 @@ def generate_pdf(data, filepath):
     symptoms_text = ", ".join(data['symptoms'])
     c.drawString(70, y, remove_accents(symptoms_text))
     y -= 30
+
     # Bệnh chẩn đoán
     c.setFont("Helvetica-Bold", 14)
     c.drawString(50, y, "3. Benh nghi ngo")
@@ -68,6 +70,7 @@ def generate_pdf(data, filepath):
         c.drawString(70, y, "Khong co")
         y -= 20
     y -= 10
+
     # Điều trị
     c.setFont("Helvetica-Bold", 14)
     c.drawString(50, y, "5. Phuong phap dieu tri tham khao")
@@ -86,4 +89,3 @@ def generate_pdf(data, filepath):
     c.drawString(50, y, "LUU Y: Ket qua chi mang tinh tham khao, khong thay the chan doan cua bac si.")
 
     c.save()
-    
