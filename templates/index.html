@@ -4,7 +4,7 @@
 <div class="form-container">
     <h1 class="page-title">Chẩn Đoán Bệnh Lý Hô Hấp</h1>
     <p class="subtitle">Vui lòng điền thông tin và các triệu chứng bạn đang gặp phải.</p>
-      
+    
     <form action="{{ url_for('diagnose') }}" method="POST" class="diagnosis-form" onsubmit="return validateForm()">
         <div class="left-panel panel">
             <h2>Thông tin bệnh nhân</h2>
@@ -24,3 +24,41 @@
                     <option value="Nữ">Nữ</option>
                     <option value="Khác">Khác</option>
                 </select>
+            </div>
+            <div class="form-group">
+                <label>Số điện thoại:</label>
+                <input type="text" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label>Địa chỉ:</label>
+                <textarea name="address" rows="3" required></textarea>
+            </div>
+        </div>
+
+        <div class="right-panel panel">
+            <h2> Chọn triệu chứng</h2>
+            <div class="checkbox-grid">
+                <label><input type="checkbox" name="symptoms" value="Ho"> Ho</label>
+                <label><input type="checkbox" name="symptoms" value="Ho kéo dài"> Ho kéo dài</label>
+                <label><input type="checkbox" name="symptoms" value="Sốt"> Sốt</label>
+                <label><input type="checkbox" name="symptoms" value="Khó thở"> Khó thở</label>
+                <label><input type="checkbox" name="symptoms" value="Khò khè"> Khò khè</label>
+                <label><input type="checkbox" name="symptoms" value="Đau họng"> Đau họng</label>
+                <label><input type="checkbox" name="symptoms" value="Chảy nước mũi"> Chảy nước mũi</label>
+                <label><input type="checkbox" name="symptoms" value="Đau ngực"> Đau ngực</label>
+                <label><input type="checkbox" name="symptoms" value="Mệt mỏi"> Mệt mỏi</label>
+                <label><input type="checkbox" name="symptoms" value="Đờm nhiều"> Đờm nhiều</label>
+                <label><input type="checkbox" name="symptoms" value="Hắt hơi"> Hắt hơi</label>
+                <label><input type="checkbox" name="symptoms" value="Ngứa mũi"> Ngứa mũi</label>
+                <label><input type="checkbox" name="symptoms" value="Nghẹt mũi"> Nghẹt mũi</label>
+                <label><input type="checkbox" name="symptoms" value="Khản tiếng"> Khản tiếng</label>
+                <label><input type="checkbox" name="symptoms" value="Đau cơ"> Đau cơ</label>
+                <label><input type="checkbox" name="symptoms" value="Sụt cân"> Sụt cân</label>
+            </div>
+            <p id="error-msg" class="error-msg"></p>
+        </div>
+
+        <button type="submit" class="btn-submit">Chẩn Đoán Ngay</button>
+    </form>
+</div>
+{% endblock %}
