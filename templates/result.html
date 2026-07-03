@@ -1,4 +1,6 @@
-{% extends 'layout.html' %} {% block content %}
+{% extends 'layout.html' %}
+
+{% block content %}
 <h1 class="page-title">Kết Quả Chẩn Đoán</h1>
 <p class="date-created">Ngày tạo: {{ data.date }}</p>
 
@@ -15,21 +17,39 @@
     </div>
 
     <div class="card disease-card">
-        <h3>Bệnh nghi ngờ</h3>
-        <ul>
-            {% for d in data.diagnosis.diseases %}
-            <li>{{ d }}</li>
-            {% endfor %}
-        </ul>
+        <h3>Bệnh nghi ngờ (xếp theo % khả năng)</h3>
+        {% if data.diagnosis.diseases %}
+            <ul class="disease-list">
+                {% for d in data.diagnosis.diseases %}
+                    <li class="disease-item">
+                        <div class="disease-item-header">
+                            <span class="disease-name">{{ d.disease }}</span>
+                            <span class="disease-percent">{{ d.probability }}%</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" style="--pct: {{ d.probability }}"></div>
+                        </div>
+                        <p class="disease-matched">
+                            Khớp {{ d.matched_count }}/{{ d.total_symptoms }} triệu chứng:
+                            {{ d.matched_symptoms | join(', ') }}
+                        </p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="no-result">{{ data.diagnosis.no_result_message }}</p>
+        {% endif %}
     </div>
 
     <div class="card test-card">
         <h3>Xét nghiệm đề xuất</h3>
         <ul>
-            {% if data.diagnosis.tests %} {% for t in data.diagnosis.tests %}
-            <li>{{ t }}</li>
-            {% endfor %} {% else %}
-            <li>Chưa có đề xuất đặc thù.</li>
+            {% if data.diagnosis.tests %}
+                {% for t in data.diagnosis.tests %}
+                    <li>{{ t }}</li>
+                {% endfor %}
+            {% else %}
+                <li>Chưa có đề xuất đặc thù.</li>
             {% endif %}
         </ul>
     </div>
@@ -37,10 +57,12 @@
     <div class="card treatment-card">
         <h3>Phương pháp điều trị tham khảo</h3>
         <ul>
-            {% if data.diagnosis.treatments %} {% for tr in data.diagnosis.treatments %}
-            <li>{{ tr }}</li>
-            {% endfor %} {% else %}
-            <li>Chưa có đề xuất đặc thù.</li>
+            {% if data.diagnosis.treatments %}
+                {% for tr in data.diagnosis.treatments %}
+                    <li>{{ tr }}</li>
+                {% endfor %}
+            {% else %}
+                <li>Chưa có đề xuất đặc thù.</li>
             {% endif %}
         </ul>
     </div>
@@ -51,7 +73,7 @@
 </div>
 
 <div class="action-card">
-    <a href="{{ url_for('export_pdf') }}" class="btn-pdf">📄 Xuất Báo Cáo PDF</a>
     <a href="{{ url_for('index') }}" class="btn-back">Chẩn đoán lại</a>
 </div>
 {% endblock %}
+
